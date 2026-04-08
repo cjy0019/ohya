@@ -1,32 +1,49 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Colors — 오늘야장 디자인 시스템 */
+  /* ── Primary ── */
   --color-primary: #D9622B;
   --color-primary-light: #E8845A;
   --color-primary-dark: #B84E1F;
-  --color-background: #FEFCFB;
-  --color-foreground: #1A1209;
-  --color-muted: #7A6A5A;
-  --color-border: #EDE8E3;
-  --color-card: #FFFFFF;
-  --color-surface: #FFFFFF;
-  --color-text: #1A1209;
+  --color-primary-subtle: #F7EDE6;   /* 배지 배경, 칩 배경 */
 
-  /* Fonts */
+  /* ── Neutral ── */
+  --color-background: #FEFCFB;
+  --color-surface: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-border: #EDE8E3;
+  --color-border-strong: #D9D0C8;
+
+  /* ── Text ── */
+  --color-foreground: #1A1209;
+  --color-text: #1A1209;
+  --color-muted: #7A6A5A;
+  --color-muted-light: #B0A398;      /* 서브 레이블, 힌트 텍스트 */
+
+  /* ── Semantic ── */
+  --color-warning: #F5A623;          /* 평점 별 */
+  --color-success: #3D9970;          /* 인증 배지 */
+  --color-overlay: rgba(26, 18, 9, 0.4);
+
+  /* ── Fonts ── */
   --font-sans: var(--font-pretendard), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-fraunces), Georgia, serif;
 
-  /* Border radius */
+  /* ── Border radius ── */
   --radius-sm: 0.375rem;
   --radius-md: 0.75rem;
   --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-pin: 0 2px 8px rgba(217, 98, 43, 0.3);
-  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
-  --shadow-sheet: 0 -4px 24px rgba(0, 0, 0, 0.12);
+  /* ── Shadows ── */
+  --shadow-pin: 0 2px 8px rgba(217, 98, 43, 0.35);
+  --shadow-pin-selected: 0 4px 16px rgba(217, 98, 43, 0.5);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-sheet: 0 -4px 32px rgba(0, 0, 0, 0.14);
+  --shadow-chip: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-preview-card: 0 1px 4px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 :root {
@@ -38,4 +55,13 @@
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
+}
+
+/* 스크롤바 숨김 유틸 */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
