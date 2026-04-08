@@ -9,7 +9,9 @@
     "start": "node dist/index.js",
     "lint": "eslint src",
     "type-check": "tsc --noEmit",
-    "migrate": "node --loader tsx src/db/migrate.ts"
+    "migrate": "tsx src/db/migrate.ts",
+    "seed": "tsx src/scripts/seed-public-data.ts",
+    "seed:public": "tsx src/scripts/seed-public-data.ts --public"
   },
   "dependencies": {
     "@fastify/cors": "^10.0.2",
