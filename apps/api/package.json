@@ -10,6 +10,7 @@
     "lint": "eslint src",
     "type-check": "tsc --noEmit",
     "migrate": "tsx src/db/migrate.ts",
+    "migrate:prod": "node dist/db/migrate.js",
     "seed": "tsx src/scripts/seed-public-data.ts",
     "seed:public": "tsx src/scripts/seed-public-data.ts --public"
   },
