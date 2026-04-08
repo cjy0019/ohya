@@ -83,15 +83,15 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER trg_users_updated_at
+CREATE OR REPLACE TRIGGER trg_users_updated_at
   BEFORE UPDATE ON users
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
-CREATE TRIGGER trg_spots_updated_at
+CREATE OR REPLACE TRIGGER trg_spots_updated_at
   BEFORE UPDATE ON spots
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
-CREATE TRIGGER trg_reviews_updated_at
+CREATE OR REPLACE TRIGGER trg_reviews_updated_at
   BEFORE UPDATE ON reviews
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -113,7 +113,7 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER trg_update_spot_stats
+CREATE OR REPLACE TRIGGER trg_update_spot_stats
   AFTER INSERT OR UPDATE OR DELETE ON reviews
   FOR EACH ROW EXECUTE FUNCTION update_spot_stats();
 
