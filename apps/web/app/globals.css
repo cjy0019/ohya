@@ -10,6 +10,8 @@
   --color-muted: #7A6A5A;
   --color-border: #EDE8E3;
   --color-card: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-text: #1A1209;
 
   /* Fonts */
   --font-sans: var(--font-pretendard), system-ui, -apple-system, sans-serif;
