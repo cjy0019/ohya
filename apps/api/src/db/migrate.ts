@@ -9,7 +9,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const MIGRATIONS_DIR = resolve(__dirname, "migrations");
 
-const MIGRATION_FILES = ["001_initial_schema.sql"];
+const MIGRATION_FILES = [
+  "001_initial_schema.sql",
+  "002_spots_add_category_fields.sql",
+];
 
 async function migrate() {
   const client = new Client({ connectionString: process.env.DATABASE_URL });
