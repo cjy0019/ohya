@@ -1,9 +1,9 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "corepack enable && pnpm install --frozen-lockfile && pnpm --filter @oneul-yajang/api build"
+buildCommand = "npm install -g pnpm@9.15.0 && pnpm install --frozen-lockfile && pnpm --filter @oneul-yajang/api build"
 
 [deploy]
-startCommand = "corepack enable && pnpm --filter @oneul-yajang/api migrate && node apps/api/dist/index.js"
+startCommand = "npm install -g pnpm@9.15.0 && pnpm --filter @oneul-yajang/api migrate && node apps/api/dist/index.js"
 healthcheckPath = "/health"
 healthcheckTimeout = 30
 restartPolicyType = "ON_FAILURE"
