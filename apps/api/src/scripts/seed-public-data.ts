@@ -583,7 +583,7 @@ async function seedCurated(pool: InstanceType<typeof Pool>): Promise<number> {
           has_heater, has_shelter, pet_friendly,
           data_source, source_id)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'public_data',$11)
-       ON CONFLICT ON CONSTRAINT uq_spots_source DO NOTHING`,
+       ON CONFLICT (data_source, source_id) WHERE source_id IS NOT NULL DO NOTHING`,
       [
         spot.name, spot.address, spot.lat, spot.lng,
         spot.category, spot.yajang_type, spot.is_outdoor,
@@ -618,7 +618,7 @@ async function seedFromPublicApi(pool: InstanceType<typeof Pool>, apiKey: string
             category, yajang_type, is_outdoor,
             data_source, source_id)
          VALUES ($1,$2,$3,$4,'restaurant','terrace',true,'public_data',$5)
-         ON CONFLICT ON CONSTRAINT uq_spots_source DO NOTHING`,
+         ON CONFLICT (data_source, source_id) WHERE source_id IS NOT NULL DO NOTHING`,
         [row.bplcnm, row.rdnwhladdr, lat, lng, sourceId]
       );
       inserted++;

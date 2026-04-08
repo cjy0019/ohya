@@ -20,9 +20,15 @@ export const spotsRoutes: FastifyPluginAsync = async (app) => {
     const category = req.query.category;
     const yajang_type = req.query.yajang_type;
 
-    const conditions: string[] = [
-      `ST_DWithin(location::geography, ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography, $3)`,
-    ];
+    // Haversine 반경 필터 (PostGIS 불필요, 순수 SQL)
+    const haversine = `(
+      2 * 6371000 * ASIN(SQRT(
+        POWER(SIN(RADIANS((lat - $2::float) / 2)), 2) +
+        COS(RADIANS($2::float)) * COS(RADIANS(lat)) *
+        POWER(SIN(RADIANS((lng - $1::float) / 2)), 2)
+      ))
+    )`;
+    const conditions: string[] = [`${haversine} <= $3`];
     const params: (number | string)[] = [lng, lat, radius];
 
     if (category) {
@@ -44,9 +50,12 @@ export const spotsRoutes: FastifyPluginAsync = async (app) => {
          review_count, avg_rating, created_at
        FROM spots
        WHERE ${where}
-       ORDER BY ST_Distance(
-         location::geography,
-         ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography
+       ORDER BY (
+         2 * 6371000 * ASIN(SQRT(
+           POWER(SIN(RADIANS((lat - $2::float) / 2)), 2) +
+           COS(RADIANS($2::float)) * COS(RADIANS(lat)) *
+           POWER(SIN(RADIANS((lng - $1::float) / 2)), 2)
+         ))
        )
        LIMIT 100`,
       params

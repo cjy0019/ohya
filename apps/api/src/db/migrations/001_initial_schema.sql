@@ -3,8 +3,7 @@
 
 BEGIN;
 
--- PostGIS 확장 활성화
-CREATE EXTENSION IF NOT EXISTS postgis;
+-- uuid 확장 활성화 (PostGIS 제거 — Railway 호환성)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ────────────────────────────────────────
@@ -34,9 +33,6 @@ CREATE TABLE IF NOT EXISTS spots (
   address          TEXT,
   lat              DOUBLE PRECISION NOT NULL,
   lng              DOUBLE PRECISION NOT NULL,
-  location         GEOMETRY(Point, 4326) GENERATED ALWAYS AS (
-                     ST_SetSRID(ST_MakePoint(lng, lat), 4326)
-                   ) STORED,
   -- 비로그인 등록 지원
   created_by_user  UUID REFERENCES users(id) ON DELETE SET NULL,
   created_by_token TEXT,                    -- 비로그인 사용자 fingerprint
@@ -52,8 +48,9 @@ CREATE TABLE IF NOT EXISTS spots (
   updated_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- 공간 인덱스 (반경 검색)
-CREATE INDEX IF NOT EXISTS idx_spots_location ON spots USING GIST (location);
+-- lat/lng 범위 인덱스 (Haversine 바운딩 박스 프리필터)
+CREATE INDEX IF NOT EXISTS idx_spots_lat ON spots (lat);
+CREATE INDEX IF NOT EXISTS idx_spots_lng ON spots (lng);
 
 -- 최근 등록순 인덱스
 CREATE INDEX IF NOT EXISTS idx_spots_created_at ON spots (created_at DESC);
