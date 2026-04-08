@@ -1,0 +1,16 @@
+{
+  "name": "oneul-yajang",
+  "private": true,
+  "version": "0.0.1",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "type-check": "pnpm -r type-check"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
