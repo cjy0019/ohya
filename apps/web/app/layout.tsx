@@ -16,9 +16,25 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://oneul-yajang.vercel.app";
+
 export const metadata: Metadata = {
   title: "오늘야장 — 야외 외식 장소 탐색",
-  description: "따뜻한 날씨에 즐기는 야외 외식 장소를 발견하세요.",
+  description: "따뜻한 날씨에 즐기는 야외 외식 장소를 발견하세요. 전국의 야장 맛집을 지도로 탐색하세요.",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "오늘야장 — 야외 외식 장소 탐색",
+    description: "따뜻한 날씨에 즐기는 야외 외식 장소를 발견하세요. 전국의 야장 맛집을 지도로 탐색하세요.",
+    url: siteUrl,
+    siteName: "오늘야장",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "오늘야장 — 야외 외식 장소 탐색",
+    description: "따뜻한 날씨에 즐기는 야외 외식 장소를 발견하세요. 전국의 야장 맛집을 지도로 탐색하세요.",
+  },
 };
 
 export default function RootLayout({
